@@ -9,7 +9,7 @@ owm = pyowm.OWM(weather_key)
 mgr = owm.weather_manager()
 user_id = []
 place_list = []
-help_msg = "Hey!!!\nКоманды:\n/place - Ввод названия города. \n/update - Обновление информации об погоде в текущем городе \n/current_place - Вывод текущего города. \n/help - Вывод справки по командам бота"
+help_msg = "Команды:\n/place - Ввод названия города. \n/update - Обновление информации об погоде в текущем городе \n/current_place - Вывод текущего города. \n/help - Вывод справки по командам бота"
 
 keyboard = telebot.types.ReplyKeyboardMarkup(True, True)
 keyboard.row('/place', '/update','/current_place','/help')
@@ -17,7 +17,7 @@ keyboard.row('/place', '/update','/current_place','/help')
 @bot.message_handler(commands=['start'])
 def start_message(message):
     set_user(message.chat.id)
-    bot.send_message(message.chat.id, help_msg,reply_markup=keyboard)
+    bot.send_message(message.chat.id, "Здравствуйте " + str(message.chat.username) + " !\nВас приветсвует телеграм бот созданый творцом two-dimensional-array\nДля отображения списка комманд введите /help",reply_markup=keyboard)
 
 @bot.message_handler(commands=['place'])
 def get_message(message):
