@@ -14,11 +14,14 @@ conn, addr = sock.accept()
 def start_message(message):
     bot.send_message(message.chat.id, "Здравствуйте " + str(message.chat.username) + " !\nВас приветсвует телеграм бот созданый творцом two-dimensional-array\n")
 
-@bot.message_handler(content_types=['text'])
-def get_message(message):
-    mgs = message.text
-    data = mgs + '\n'
-    conn.send(data.encode())
-    bot.send_message(message.chat.id, "led is " + mgs)
+@bot.message_handler(commands=['on'])
+def on_led(message):
+    conn.send("on\n".encode())
+    bot.send_message(message.chat.id, "Светодиод включен")
+
+@bot.message_handler(commands=['off'])
+def off_led(message):
+    conn.send("off\n".encode())
+    bot.send_message(message.chat.id, "Светодиод выключен")
 
 bot.polling(none_stop=True)
