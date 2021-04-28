@@ -25,6 +25,13 @@ class _state:
 state_led = _state()
 help_msg = "Команды:\n/on - Включение светодиода на плате. \n/off - Выключение светодиода на плате.\n/help - Вывод справки по командам бота"
 
+def led_request(state):
+    if (state_led.not_equal(state)):
+        conn.send(state + '\n'.encode())
+        state_led.set_state(state)
+    else:
+        pass
+
 @bot.message_handler(commands=['start'])
 def start_message(message):
     bot.send_message(message.chat.id, "Здравствуйте " + str(message.chat.username) + " !\nВас приветсвует телеграм бот созданый творцом two-dimensional-array\nДля отображения списка комманд введите /help", reply_markup=keyboard)
@@ -35,16 +42,12 @@ def help_message(message):
 
 @bot.message_handler(commands=['on'])
 def on_led(message):
-    if (state_led.not_equal("on")):
-        conn.send("on\n".encode())
-        state_led.set_state("on")
+    led_request("on")
     bot.send_message(message.chat.id, "Светодиод включен", reply_markup=keyboard)
 
 @bot.message_handler(commands=['off'])
 def off_led(message):
-    if (state_led.not_equal("off")):
-        conn.send("off\n".encode())
-        state_led.set_state("off")
+    led_request("off")
     bot.send_message(message.chat.id, "Светодиод выключен", reply_markup=keyboard)
 
 bot.polling(none_stop=True)
