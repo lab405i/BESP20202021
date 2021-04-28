@@ -23,10 +23,15 @@ class _state:
         return self.state == state
 
 state_led = _state()
+help_msg = "Команды:\n/on - Включение светодиода на плате. \n/off - Выключение светодиода на плате.\n/help - Вывод справки по командам бота"
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
-    bot.send_message(message.chat.id, "Здравствуйте " + str(message.chat.username) + " !\nВас приветсвует телеграм бот созданый творцом two-dimensional-array\n", reply_markup=keyboard)
+    bot.send_message(message.chat.id, "Здравствуйте " + str(message.chat.username) + " !\nВас приветсвует телеграм бот созданый творцом two-dimensional-array\nДля отображения списка комманд введите /help", reply_markup=keyboard)
+
+@bot.message_handler(commands=['help'])
+def help_message(message):
+    bot.send_message(message.chat.id, help_msg, reply_markup=keyboard)
 
 @bot.message_handler(commands=['on'])
 def on_led(message):
