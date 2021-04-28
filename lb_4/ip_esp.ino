@@ -1,27 +1,29 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 
-#define WIFI_SSID "Attack_Helicopter"
-#define WIFI_PASSWORD "19861986"
+#define WIFI_SSID "ssid"
+#define WIFI_PASSWORD "password"
 #define SERVER_IP_ADDRES "255.255.255.255"
 #define SERVER_PORT 8080
+#define DELAY_WIFI_CONNECTION 500
+#define DELAY_SERVER_CONNECTION 500
+#define DELAY_LOOP 5
 
 WiFiClient esp;
 
 void setup()
 {
-    Serial.begin(9600);
     pinMode(LED_BUILTIN, OUTPUT);
     digitalWrite(LED_BUILTIN,0);
     WiFi.mode(WIFI_STA);
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
     while (WiFi.status() != WL_CONNECTED) 
     {
-        delay(500);
+        delay(DELAY_WIFI_CONNECTION);
     }
     while(!esp.connect(SERVER_IP_ADDRES,SERVER_PORT))
     {
-        delay(500);
+        delay(DELAY_SERVER_CONNECTION);
     }
 }
 
@@ -39,5 +41,5 @@ void loop()
             digitalWrite(LED_BUILTIN,0);
         }
     }
-    delay(10);
+    delay(DELAY_LOOP);
 }
