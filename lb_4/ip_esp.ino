@@ -1,13 +1,13 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 
-#define WIFI_SSID "ssid"
-#define WIFI_PASSWORD "password"
-#define SERVER_IP_ADDRES "255.255.255.255"
-#define SERVER_PORT 8080
-#define DELAY_WIFI_CONNECTION 500
-#define DELAY_SERVER_CONNECTION 500
-#define DELAY_LOOP 5
+#define WIFI_SSID "ssid"                    //ssid of wifi, to which ESP8266 is connected
+#define WIFI_PASSWORD "password"            //password of wifi, to which ESP8266 is connected
+#define SERVER_IP_ADDRES "255.255.255.255"  //ip addres of server, to which ESP8266 is connected
+#define SERVER_PORT 8080                    //port of server, to which ESP8266 is connected
+#define DELAY_WIFI_CONNECTION 500           //delay for try connection to wifi in ms
+#define DELAY_SERVER_CONNECTION 500         //delay for try connection to server in ms
+#define DELAY_LOOP 5                        //delay for loop iteration in ms
 
 WiFiClient esp;
 
