@@ -10,6 +10,10 @@ sock.bind((socket_ip_addres, socket_port))
 sock.listen()
 conn, addr = sock.accept()
 
+@bot.message_handler(commands=['start'])
+def start_message(message):
+    bot.send_message(message.chat.id, "Здравствуйте " + str(message.chat.username) + " !\nВас приветсвует телеграм бот созданый творцом two-dimensional-array\n")
+
 @bot.message_handler(content_types=['text'])
 def get_message(message):
     mgs = message.text
